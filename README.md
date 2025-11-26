@@ -32,10 +32,11 @@ struct MyVideoView: View {
     var body: some View {
         VideoPlayerSDK.createPlayerView(
             credentials: VideoPlayerCredentials(
-                email: "accounts@dangal.com",
-                password: "12345678",
-                contentId: "dangal",
-                packageName: "com.dangalplay.tv"
+               email: "user@example.com ,  // "accounts@dangal.com",
+                password: "your password",  //  "12345678",
+                contentId: "Your content id"  //  "dangal",
+                packageName: "Your package Id" //"com.dangalplay.tv",
+                deviceId: "custom-device-id" // Optional, auto-generated if nil
             ),
             autoplay: false
         )
@@ -71,10 +72,10 @@ struct MyVideoView: View, VideoPlayerSDKDelegate {
     var body: some View {
         VideoPlayerSDK.createPlayerView(
             credentials: VideoPlayerCredentials(
-                email: "accounts@dangal.com",
-                password: "12345678",
-                contentId: "dangal",
-                packageName: "com.dangalplay.tv",
+                email: "user@example.com ,  // "accounts@dangal.com",
+                password: "your password",  //  "12345678",
+                contentId: "Your content id"  //  "dangal",
+                packageName: "Your package Id" //"com.dangalplay.tv",
                 deviceId: "custom-device-id" // Optional, auto-generated if nil
             ),
             autoplay: true,
@@ -154,6 +155,96 @@ Protocol for receiving video player events.
 - `videoDidFail(with:)` - Called when an error occurs
 - `fullscreenChanged(isFullscreen:)` - Called when fullscreen state changes
 
+
+### Implimentaiton for Uikit
+
+import UIKit
+import SwiftUI
+import CustomVideoPlayer
+ 
+// MARK: - UIKit Wrapper for Video Player
+class VideoPlayerViewController: UIViewController {
+    private var hostingController: UIHostingController<AnyView>?
+    private var credentials: VideoPlayerCredentials?
+    private var streamURL: URL?
+    private var autoplay: Bool
+    private var delegate: VideoPlayerSDKDelegate?
+    
+    init(credentials: VideoPlayerCredentials, autoplay: Bool = false, delegate: VideoPlayerSDKDelegate? = nil) {
+        self.credentials = credentials
+        self.autoplay = autoplay
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(streamURL: URL, autoplay: Bool = false, delegate: VideoPlayerSDKDelegate? = nil) {
+        self.streamURL = streamURL
+        self.autoplay = autoplay
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.autoplay = false
+        super.init(coder: coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupVideoPlayer()
+    }
+    
+    private func setupVideoPlayer() {
+        let videoPlayerView: AnyView
+        
+        if let credentials = credentials {
+            // DRM playback with credentials
+            videoPlayerView = AnyView(
+                VideoPlayerSDK.createPlayerView(
+                    credentials: credentials,
+                    autoplay: autoplay,
+                    delegate: delegate
+                )
+            )
+        } else if let streamURL = streamURL {
+            // Non-DRM playback with URL
+            videoPlayerView = AnyView(
+                VideoPlayerSDK.createPlayerView(
+                    streamURL: streamURL,
+                    autoplay: autoplay,
+                    delegate: delegate
+                )
+            )
+        } else {
+            // Fallback - empty view
+            videoPlayerView = AnyView(EmptyView())
+        }
+        
+        // Create hosting controller
+        hostingController = UIHostingController(rootView: videoPlayerView)
+        
+        guard let hostingController = hostingController else { return }
+        
+        // Add as child view controller
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        hostingController.didMove(toParent: self)
+    }
+}
+ 
+
+
+
+
 ## Requirements
 
 - iOS 14.0+
@@ -169,3 +260,7 @@ Protocol for receiving video player events.
 - Controls automatically hide after 8 seconds of inactivity
 
 ## License
+
+
+
+
