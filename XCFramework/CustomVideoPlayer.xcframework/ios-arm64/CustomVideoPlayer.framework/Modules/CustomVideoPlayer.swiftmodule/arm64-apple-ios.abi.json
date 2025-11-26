@@ -6,30 +6,6 @@
     "children": [
       {
         "kind": "Import",
-        "name": "SwiftUI",
-        "printedName": "SwiftUI",
-        "declKind": "Import",
-        "moduleName": "CustomVideoPlayer",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "AVKit",
-        "printedName": "AVKit",
-        "declKind": "Import",
-        "moduleName": "CustomVideoPlayer"
-      },
-      {
-        "kind": "Import",
-        "name": "MediaPlayer",
-        "printedName": "MediaPlayer",
-        "declKind": "Import",
-        "moduleName": "CustomVideoPlayer"
-      },
-      {
-        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -881,60 +857,35 @@
         "printedName": "AVKit",
         "declKind": "Import",
         "moduleName": "CustomVideoPlayer"
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "CustomVideoPlayer",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AVKit",
+        "printedName": "AVKit",
+        "declKind": "Import",
+        "moduleName": "CustomVideoPlayer"
+      },
+      {
+        "kind": "Import",
+        "name": "MediaPlayer",
+        "printedName": "MediaPlayer",
+        "declKind": "Import",
+        "moduleName": "CustomVideoPlayer"
       }
     ],
     "json_format_version": 8
   },
   "ConstValues": [
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1208,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2481,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2578,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2640,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2755,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "FloatLiteral",
-      "offset": 15037,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
-      "kind": "BooleanLiteral",
-      "offset": 21678,
-      "length": 5,
-      "value": "false"
-    },
     {
       "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/CustomVideoPlayer.swift",
       "kind": "BooleanLiteral",
@@ -1221,6 +1172,55 @@
       "offset": 385,
       "length": 6,
       "value": "\"None\""
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1208,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2481,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2578,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2640,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2755,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "FloatLiteral",
+      "offset": 15037,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/ishpreet-multitv\/Desktop\/Projects\/CustomVideoPlayer\/CustomVideoPlayer\/Sources\/VideoView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 21830,
+      "length": 5,
+      "value": "false"
     }
   ]
 }
