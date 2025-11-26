@@ -1,0 +1,43 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios18.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name CustomVideoPlayer
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+import AVFoundation
+import AVKit
+import Combine
+import DoveRunnerFairPlay
+import Foundation
+import MediaPlayer
+import Swift
+import SwiftUI
+import UIKit
+import _AVKit_SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct VideoPlayerCredentials {
+  public let email: Swift.String
+  public let password: Swift.String
+  public let contentId: Swift.String
+  public let packageName: Swift.String
+  public let deviceId: Swift.String?
+  public init(email: Swift.String, password: Swift.String, contentId: Swift.String, packageName: Swift.String, deviceId: Swift.String? = nil)
+}
+public protocol VideoPlayerSDKDelegate {
+  func videoDidPlay()
+  func videoDidPause()
+  func videoDidFinish()
+  func videoDidFail(with error: any Swift.Error)
+  func fullscreenChanged(isFullscreen: Swift.Bool)
+}
+@_hasMissingDesignatedInitializers public class VideoPlayerSDK {
+  public static func createPlayerView(credentials: CustomVideoPlayer.VideoPlayerCredentials, autoplay: Swift.Bool = false, delegate: (any CustomVideoPlayer.VideoPlayerSDKDelegate)? = nil) -> some SwiftUICore.View
+  
+  public static func createPlayerView(streamURL: Foundation.URL, autoplay: Swift.Bool = false, delegate: (any CustomVideoPlayer.VideoPlayerSDKDelegate)? = nil) -> some SwiftUICore.View
+  
+  public static func getDeviceId() -> Swift.String
+  public static func clearAuthTokens()
+  @objc deinit
+}
+public struct VideoConfig {
+}
