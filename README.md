@@ -32,11 +32,9 @@ struct MyVideoView: View {
     var body: some View {
         VideoPlayerSDK.createPlayerView(
             credentials: VideoPlayerCredentials(
-               email: "user@example.com ,  // "user@exmple.com",
-                password: "your password",  //  "12345678",
                 contentId: "Your content id"  //  "contnt",
                 packageName: "Your package Id" //"com.explale.app",
-                deviceId: "custom-device-id" // Optional, auto-generated if nil
+                
             ),
             autoplay: false
         )
@@ -72,11 +70,9 @@ struct MyVideoView: View, VideoPlayerSDKDelegate {
     var body: some View {
         VideoPlayerSDK.createPlayerView(
             credentials: VideoPlayerCredentials(
-                email: "user@example.com ,  // "user@exmple.com",
-                password: "your password",  //  "12345678",
                 contentId: "Your content id"  //  "contnt",
                 packageName: "Your package Id" //"com.explale.app",
-                deviceId: "custom-device-id" // Optional, auto-generated if nil
+              
             ),
             autoplay: true,
             delegate: self
@@ -118,8 +114,6 @@ struct ContentView: View {
             // Add video player
             VideoPlayerSDK.createPlayerView(
                 credentials: VideoPlayerCredentials(
-                    email: "user@example.com",
-                    password: "password",
                     contentId: "content-id",
                     packageName: "com.yourapp.package"
                 )
@@ -137,11 +131,8 @@ Configuration structure for video playback.
 
 #### Properties
 
-- `email: String` - User email for authentication
-- `password: String` - User password for authentication
 - `contentId: String` - Content ID to play
 - `packageName: String` - App package name
-- `deviceId: String?` - Optional device ID (auto-generated if nil)
 
 ### VideoPlayerSDKDelegate
 
