@@ -15,7 +15,14 @@ import _AVKit_SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-public struct VideoConfig {
+public enum VideoPlayerState {
+  case idle
+  case readyToPlay
+  case playing
+  case paused
+  case buffering
+  case finished
+  case failed(error: (any Swift.Error)?)
 }
 public struct VideoPlayerCredentials {
   public let contentId: Swift.String
@@ -29,6 +36,12 @@ public protocol VideoPlayerSDKDelegate {
   func videoDidFinish()
   func videoDidFail(with error: any Swift.Error)
   func fullscreenChanged(isFullscreen: Swift.Bool)
+  func videoPlayer(didUpdateState state: CustomVideoPlayer.VideoPlayerState)
+  func videoPlayer(didUpdateTime current: Swift.Double, duration: Swift.Double)
+}
+extension CustomVideoPlayer.VideoPlayerSDKDelegate {
+  public func videoPlayer(didUpdateState state: CustomVideoPlayer.VideoPlayerState)
+  public func videoPlayer(didUpdateTime current: Swift.Double, duration: Swift.Double)
 }
 @_hasMissingDesignatedInitializers public class VideoPlayerSDK {
   public static func createPlayerView(credentials: CustomVideoPlayer.VideoPlayerCredentials, autoplay: Swift.Bool = false, delegate: (any CustomVideoPlayer.VideoPlayerSDKDelegate)? = nil) -> some SwiftUICore.View
@@ -38,4 +51,16 @@ public protocol VideoPlayerSDKDelegate {
   public static func getDeviceId() -> Swift.String
   public static func clearAuthTokens()
   @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class VideoPlayerUIView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var credentials: CustomVideoPlayer.VideoPlayerCredentials?
+  @_Concurrency.MainActor @preconcurrency public var streamURL: Foundation.URL?
+  @_Concurrency.MainActor @preconcurrency public var autoplay: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var playerDelegate: (any CustomVideoPlayer.VideoPlayerSDKDelegate)?
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+public struct VideoConfig {
 }

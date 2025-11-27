@@ -147,93 +147,62 @@ Protocol for receiving video player events.
 - `fullscreenChanged(isFullscreen:)` - Called when fullscreen state changes
 
 
-### Implimentaiton for Uikit
+📱 UIKit Implementation Guide
 
+This section explains how to integrate the CustomVideoPlayer inside your UIKit project using UIViewController and VideoPlayerUIView.
+
+▶️ Example Usage (UIKit)
 import UIKit
 import SwiftUI
 import CustomVideoPlayer
- 
-// MARK: - UIKit Wrapper for Video Player
-class VideoPlayerViewController: UIViewController {
-    private var hostingController: UIHostingController<AnyView>?
-    private var credentials: VideoPlayerCredentials?
-    private var streamURL: URL?
-    private var autoplay: Bool
-    private var delegate: VideoPlayerSDKDelegate?
-    
-    init(credentials: VideoPlayerCredentials, autoplay: Bool = false, delegate: VideoPlayerSDKDelegate? = nil) {
-        self.credentials = credentials
-        self.autoplay = autoplay
-        self.delegate = delegate
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    init(streamURL: URL, autoplay: Bool = false, delegate: VideoPlayerSDKDelegate? = nil) {
-        self.streamURL = streamURL
-        self.autoplay = autoplay
-        self.delegate = delegate
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        self.autoplay = false
-        super.init(coder: coder)
-    }
-    
+
+class ViewController: UIViewController, VideoPlayerSDKDelegate {
+
+    @IBOutlet weak var videoPl: VideoPlayerUIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupVideoPlayer()
+
+        // For DRM / Live content
+        // videoPl.credentials = VideoPlayerCredentials(
+        //     contentId: "<Content-ID>",
+        //     packageName: "<Package-Name>"
+        // )
+
+        // For normal HLS playback (use either credentials OR streamURL)
+        videoPl.streamURL = URL(string: "<Your-HLS-URL>")
+        videoPl.autoplay = true
+        videoPl.playerDelegate = self
     }
-    
-    private func setupVideoPlayer() {
-        let videoPlayerView: AnyView
-        
-        if let credentials = credentials {
-            // DRM playback with credentials
-            videoPlayerView = AnyView(
-                VideoPlayerSDK.createPlayerView(
-                    credentials: credentials,
-                    autoplay: autoplay,
-                    delegate: delegate
-                )
-            )
-        } else if let streamURL = streamURL {
-            // Non-DRM playback with URL
-            videoPlayerView = AnyView(
-                VideoPlayerSDK.createPlayerView(
-                    streamURL: streamURL,
-                    autoplay: autoplay,
-                    delegate: delegate
-                )
-            )
-        } else {
-            // Fallback - empty view
-            videoPlayerView = AnyView(EmptyView())
-        }
-        
-        // Create hosting controller
-        hostingController = UIHostingController(rootView: videoPlayerView)
-        
-        guard let hostingController = hostingController else { return }
-        
-        // Add as child view controller
-        addChild(hostingController)
-        view.addSubview(hostingController.view)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        
-        hostingController.didMove(toParent: self)
-    }
+
+    // MARK: - VideoPlayerSDKDelegate Methods
+
+    func videoDidPlay() { }
+    func videoDidPause() { }
+    func videoDidFinish() { }
+
+    func videoDidFail(with error: Error) { }
+
+    func fullscreenChanged(isFullscreen: Bool) { }
+
+    // Optional Methods (if implemented in extension)
+    // func videoPlayer(didUpdateState state: VideoPlayerState) {}
+    // func videoPlayer(didUpdateTime current: Double, duration: Double) {}
 }
- 
 
+📌 Important Notes for UIKit
 
+You can add VideoPlayerUIView from Storyboard (via @IBOutlet) or create it programmatically.
+
+Make sure to set a proper aspect ratio for the video container view.
+
+Recommended: 16 : 9 aspect ratio
+
+Only one of the following should be used at a time:
+
+.credentials → for DRM / secure content
+
+.streamURL → for standard HLS playback
 
 
 ## Requirements
